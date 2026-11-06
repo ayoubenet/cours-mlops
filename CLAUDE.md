@@ -30,7 +30,7 @@ The Alertmanager Slack webhook is never committed: `k8s/monitoring/alertmanager-
 
 ### Notebooks
 ```bash
-pip install -r requirements.txt     # includes dvc, mlflow, ipykernel
+pip install -r requirements.txt     # includes dvc, mlflow, evidently, ipykernel, jupyterlab
 jupyter lab notebooks/              # run 01 → 02 → 03 → 04 in order
 ```
 - Every notebook does `from project_setup import ...`. That module finds the repo root (the first parent containing `.dvc/` or `.git`), so paths never depend on the working directory or machine.
@@ -136,7 +136,7 @@ The Jenkinsfiles are `.txt` and are referenced from Jenkins job configs. Stages:
 
 The frontend is built with `--build-arg NEXT_PUBLIC_API_URL=http://api.fraud.local`. `NEXT_PUBLIC_*` values are baked in at build time (docker-compose passes it as a build arg too); there is no frontend ConfigMap.
 
-The Jenkins agent image is `jenkins/Dockerfile`. It provides Python 3.11 in `/opt/venv-fraud` (root `requirements.txt` + `evidently>=0.7,<0.8`), the docker CLI, and kubectl.
+The Jenkins agent image is `jenkins/Dockerfile`. It provides Python 3.11 in `/opt/venv-fraud` (root `requirements.txt`, which pins `evidently>=0.7,<0.8`), the docker CLI, and kubectl.
 
 ### Backend state and monitoring
 - `/live` always returns 200 (livenessProbe); `/health` returns **503** until model and preprocessor are loaded (readinessProbe, Dockerfile HEALTHCHECK, compose `service_healthy`).

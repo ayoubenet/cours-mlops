@@ -115,8 +115,7 @@ Depuis la racine du dépôt :
 python3.12 -m venv .venv
 source .venv/bin/activate          # Windows : .venv\Scripts\activate
 pip install --upgrade pip
-pip install -r requirements.txt    # ML, MLflow, DVC, ipykernel
-pip install jupyterlab             # facultatif si vous utilisez VS Code
+pip install -r requirements.txt    # ML, MLflow, DVC, Evidently, ipykernel, jupyterlab
 ```
 
 Vérification :

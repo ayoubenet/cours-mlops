@@ -30,13 +30,12 @@ RUN curl -LO "https://dl.k8s.io/release/v1.32.2/bin/linux/${TARGETARCH:-amd64}/k
     chmod +x kubectl && mv kubectl /usr/local/bin/kubectl
 
 # Dépendances ML pré-installées : requirements.txt (racine) contient déjà dvc,
-# mlflow et prometheus-client ; Evidently est épinglé sur la série 0.7, dont
-# drift_detection.py utilise l'API (evidently.Report, evidently.presets).
+# mlflow, prometheus-client et Evidently (épinglé sur la série 0.7, dont
+# drift_detection.py utilise l'API evidently.Report / evidently.presets).
 COPY requirements.txt /tmp/requirements.txt
 
 RUN python3.11 -m venv /opt/venv-fraud && \
     /opt/venv-fraud/bin/pip install --upgrade pip && \
-    /opt/venv-fraud/bin/pip install -r /tmp/requirements.txt && \
-    /opt/venv-fraud/bin/pip install "evidently>=0.7,<0.8"
+    /opt/venv-fraud/bin/pip install -r /tmp/requirements.txt
 
 USER jenkins

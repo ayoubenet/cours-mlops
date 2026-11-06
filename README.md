@@ -105,7 +105,7 @@ ensuite, les autres machines récupèrent le résultat avec DVC.
 
 ```bash
 python3.12 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt jupyterlab
+pip install -r requirements.txt               # inclut jupyterlab et evidently
 cp .env.example .env                          # vider MLFLOW_TRACKING_URI ; QUICK_RUN=1 pour aller vite
 # fraudTrain.csv (Kaggle) -> data/raws/fraud_1M.csv : voir l'étape 5.1
 jupyter lab notebooks/                        # exécuter 01 -> 02 -> 03 -> 04
@@ -281,8 +281,7 @@ mv data/raws/fraudTrain.csv data/raws/fraud_1M.csv && rm data/raws/fraudTest.csv
 **5.2 — Notebooks 01 et 02, puis première version des données.**
 
 ```bash
-pip install jupyterlab            # ou ouvrir le dossier dans VS Code
-jupyter lab notebooks/            # exécuter 01_eda, puis 02_preprocessing
+jupyter lab notebooks/            # (jupyterlab est dans requirements.txt ; ou VS Code) exécuter 01_eda, puis 02_preprocessing
 ```
 
 ```bash
